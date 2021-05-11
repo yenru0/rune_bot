@@ -424,10 +424,16 @@ if __name__ == '__main__':
         with open(ADMIN_DATA_ROUTE, "w", encoding='utf-8') as f:
             json.dump(DEFAULT_ADMIN, f)
     if not os.path.isfile("token.token"):
-        print("TOKEN 파일이 없습니다.")
-        quit()
+        TOKEN = os.getenv("TOKEN")
+        print(TOKEN)
+        if TOKEN:
+            print("Token from env")
+        else:
+            print("There is No Token")
+            quit()
     else:
         with open("token.token", "r", encoding='utf-8') as f:
+            print("Token from token.token")
             TOKEN = f.read()
 
     app.run(TOKEN)
